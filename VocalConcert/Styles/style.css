@@ -24,7 +24,7 @@ time {
 /* Global properties ======================================================== */
 body { 
 	background:#000; 
-	font-family:Arial, Helvetica, sans-serif;
+	font-family:'ITC Busorama',Arial, Helvetica, sans-serif, 'Microsoft YaHei';
 	font-size:100%; 
 	line-height:1em;
 	color:#979797;
@@ -132,7 +132,7 @@ body {
 input, 
 select, 
 textarea { 
-	font-family:Arial, Helvetica, sans-serif;
+	font-family:Arial, Helvetica, sans-serifm, 'Microsoft YaHei';
 	font-size:1em;
 	vertical-align:middle;
 	font-weight:normal;
