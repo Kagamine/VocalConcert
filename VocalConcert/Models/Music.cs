@@ -49,6 +49,16 @@ namespace VocalConcert.Models
         /// </summary>
         public bool RecommendMark { get; set; }
 
+        /// <summary>
+        /// 上传时间
+        /// </summary>
+        public DateTime Time { get; set; }
+
+        /// <summary>
+        /// 类型
+        /// </summary>
+        public MusicType Type { get; set; }
+
         public virtual ICollection<Comment> Comments { get; set; }
     }
 }
