@@ -1,0 +1,67 @@
+﻿@using VocalConcert.Web.Models.ViewModel;
+@using VocalConcert.Entity;
+
+@{
+    ViewBag.Title = "Show";
+    vUser user = ViewBag.User as vUser;
+
+    var imgSrc = "";
+    if (user.Avatar != null)
+    {
+        var base64 = Convert.ToBase64String(user.Avatar);
+        imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+    }
+    else
+    {
+        imgSrc = "/Images/userphoto.png";
+    }
+   
+}
+
+
+<h2>个人中心</h2>
+
+
+<div class="main-box">
+    <h3>用户名</h3>
+    <p>
+        @user.Username
+    </p>
+
+    <h3>图像 </h3>
+    <p><img src="@imgSrc" alt="图像" width="150" height="150"  style="border-radius:50%;"/></p>
+    
+    <h3>角色</h3>
+    <p>@user.Role</p>
+
+    <h3>城市</h3>
+    <p>@user.City</p>
+      
+    <h3>真实姓名</h3>
+    <p>@user.Name</p>
+
+    <h3>电话</h3>
+    <p>@user.Phone</p>
+
+
+    @if (ViewBag.CurrentUser != null)
+    { 
+       if(ViewBag.CurrentUser.ID==user.ID)
+       { 
+           <a href="/User/Edit/@user.ID">修个人信息</a>
+       }
+
+        if (ViewBag.CurrentUser.Role == UserRole.Business)
+        { 
+           <a href="/Product/Add">发布优惠产品</a>
+        }
+    }
+    
+    <div>
+        创建的歌友会：
+        @foreach (var group in user.Groups)
+        { 
+          <span><a href="/Concert/Show/@group.ID">@group.Title</a></span>
+        }
+    </div>
+</div>

@@ -1,0 +1,92 @@
+﻿@model VocalConcert.Web.Models.ViewModel.vGroup
+
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>显示歌友会信息</h2>
+
+<div class="main-box">
+        <h3>
+            图标
+        </h3>
+
+        <p>
+            <img src="/Common/ShowGroupIcon/@Model.ID" width="150" height="150" alt="图像" />
+        </p>
+
+        <h3>
+            @Html.DisplayNameFor(model => model.Title)
+        </h3>
+
+        <p>
+            @Html.DisplayFor(model => model.Title)
+        </p>
+
+        <h3>
+            @Html.DisplayNameFor(model => model.Description)
+        </h3>
+
+        <p>
+            @MvcHtmlString.Create(Model.Description)
+        </p>
+
+        <h3>
+            发起人
+        </h3>
+
+        <p>
+            @Html.DisplayFor(model => model.User.Username)
+        </p>
+
+        <h3>
+            @Html.DisplayNameFor(model => model.Time)
+        </h3>
+
+        <p>
+            @Html.DisplayFor(model => model.Time)
+        </p>
+
+        <h3>
+            @Html.DisplayNameFor(model => model.City)
+        </h3>
+
+        <p>
+            @Html.DisplayFor(model => model.City)
+        </p>
+
+
+    <div>
+        <div>成员:</div> 
+        @foreach (var user in Model.Attenders)
+        {
+            <div style="float:left;margin-right:20px;"><a href="/User/@user.ID">@user.Username</a> </div>
+        }
+    </div>
+    <div class="clr"></div>
+    <div style="margin-top:20px;">
+        @if (ViewBag.CurrentUser != null)
+        {
+            if (ViewBag.CurrentUser.ID == Model.UserID)
+            {
+                <span>@Html.ActionLink("修改", "Edit", new { id = Model.ID })</span>
+                <span>@Html.ActionLink("删除", "Delete", new { id = Model.ID })</span>
+            }
+
+
+        }
+
+        @if (@Model.CurrentIsExist == true)
+        {
+            <a href="/Concert/Quit?gid=@Model.ID&uid=@ViewBag.CurrentUser.ID">退出该歌友会</a>
+            <a href="/Action/Add/@Model.ID">发起活动</a>
+        }
+        else
+        {
+            <a href="/Concert/Attend/@Model.ID">加入</a>
+        }
+
+    </div>
+</div>
+
+

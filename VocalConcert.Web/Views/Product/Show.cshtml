@@ -1,0 +1,73 @@
+﻿@model VocalConcert.Web.Models.ViewModel.vProduct
+
+@{
+    ViewBag.Title = "Show Product";
+}
+
+<h2>@Html.DisplayFor(model => model.Title)</h2>
+<div class="main-box">
+ 
+        <h3>
+            图标
+        </h3>
+
+        <p>
+            <img src="/Common/Icon/@Model.ID" width="480"   alt="优惠产品图标" />
+        </p>
+
+        <h3>
+            @Html.DisplayNameFor(model => model.Title)
+        </h3>
+
+        <p>
+            @Html.DisplayFor(model => model.Title)
+        </p>
+
+        <h3>
+            @Html.DisplayNameFor(model => model.Description)
+        </h3>
+
+        <p>
+            @Html.DisplayFor(model => model.Description)
+        </p>
+
+        <h3>
+            @Html.DisplayNameFor(model => model.Begin)
+        </h3>
+
+        <p>
+            @Html.DisplayFor(model => model.Begin)
+        </p>
+
+        <h3>
+            @Html.DisplayNameFor(model => model.End)
+        </h3>
+
+        <p>
+            @Html.DisplayFor(model => model.End)
+        </p>
+
+        <h3>
+             商家
+        </h3>
+        <p>
+            <a href="/User/@Model.UserID">@Html.DisplayFor(model => model.User.Username)</a> 
+        </p>
+
+        <h3>
+             活动状态
+        </h3>
+
+        <p>
+            @Html.DisplayFor(model => model.Status)
+        </p>
+
+
+        <h3>
+            @Html.DisplayNameFor(model => model.Time)
+        </h3>
+
+        <p>
+            @Html.DisplayFor(model => model.Time)
+        </p>
+</div>

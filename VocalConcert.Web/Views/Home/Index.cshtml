@@ -1,0 +1,127 @@
+﻿@using VocalConcert.Web.Models.ViewModel;
+
+@{
+    ViewBag.Title = " 首页";
+}
+
+<div class="main-box">
+    <div class="col-3" style="width:30%;">
+        <div>
+            <h2>热门歌友会</h2>
+            @if (((List<vGroup>)ViewBag.Groups2).Count > 0)
+            {
+                foreach (var group in ViewBag.Groups2 as List<vGroup>)
+                {
+            <div style="padding-top:5px;padding-bottom:5px;width:100%;"> <img width="48" height="48" src="/Common/ShowGroupIcon/@group.ID" alt="歌友会" style="border-radius:50%;float:left;margin-right:10px;" /><div style="line-height:24px;float:left;"><a href="/Concert/Show/@group.ID">@group.Title</a> <br /> 人数：@group.Attenders.Count</div> <div class="clr"></div></div>
+                }
+                
+            }
+            else
+            {
+            <span>暂无热门歌友会</span>
+            }
+
+        </div>
+       
+        <div style="margin-top:20px;">
+            <h2>最新歌友会</h2>
+            @if (((List<vGroup>)ViewBag.Groups).Count() > 0)
+            {
+                foreach (var group in ViewBag.Groups as List<vGroup>)
+                {
+                    <div style="padding-top:5px;padding-bottom:5px;width:100%;"> <img width="48" height="48" src="/Common/ShowGroupIcon/@group.ID" alt="歌友会" style="border-radius:50%;float:left;margin-right:10px;" /><div style="line-height:24px;float:left;"><a href="/Concert/Show/@group.ID">@group.Title</a> <br /> 人数：@group.Attenders.Count</div> <div class="clr"></div></div>
+                }
+            }
+            else
+            {
+                <span>暂无最新歌友会</span>
+            }
+
+        </div>
+    </div>
+
+
+    <div class="col-3" style="width:30%;">
+        <div>
+            <h2>热门活动</h2>
+            @if (((List<vAction>)ViewBag.Actions2).Count > 0)
+            {
+                foreach (var action in ViewBag.Actions2 as List<vAction>)
+                {
+                    <div style="padding-top:5px;padding-bottom:5px;"><a href="/Action/Show/@action.ID">@action.Title</a> <span>@action.Time</span></div>
+                }
+            }
+            else
+            {
+            <span>暂无热门活动</span>
+            }
+        </div>
+        <div style="margin-top:20px;">
+            <h2>最新活动</h2>
+            @if (((List<vAction>)ViewBag.Actions).Count > 0)
+            {
+                foreach (var action in ViewBag.Actions as List<vAction>)
+                {
+                    <div style="padding-top:5px;padding-bottom:5px;"><a href="/Action/Show/@action.ID">@action.Title</a><span>@action.Time</span></div>
+                }
+            }
+            else
+            {
+                <span>暂无最新活动</span>
+            }
+        </div>
+
+    </div>
+
+
+    <div class="col-3" style="width:30%;">
+        <div>
+            <h2>热门音乐</h2>
+            @if (((List<vMusic>)ViewBag.Musics2).Count > 0)
+            {
+                foreach (var music in ViewBag.Musics2 as List<vMusic>)
+                {
+                    <div style="padding-top:5px;padding-bottom:5px;"><a href="/Music/Show/@music.ID">@music.Title</a> 分数：@music.Score @@<a href="/User/@music.UserID">@music.User.Username</a></div>
+                }
+            }
+            else
+            {
+                <span>暂无热门音乐</span>
+            }
+        </div>
+        <div style="margin-top:20px;">
+            <h2>最新音乐</h2>
+            @if (((List<vMusic>)ViewBag.Musics1).Count > 0)
+            {
+                foreach (var music in ViewBag.Musics1 as List<vMusic>)
+                {
+                    <div style="padding-top:5px;padding-bottom:5px;"><a href="/Music/Show/@music.ID">@music.Title</a> 分数：@music.Score @@<a href="/User/@music.UserID">@music.User.Username</a></div>
+                }
+            }
+            else
+            {
+                <span>暂无最新音乐</span>
+            }
+
+        </div>
+
+    </div>
+
+    <div class="clr"></div>
+
+    @*<div>
+        最新优惠产品：
+        @if (((List<vProduct>)ViewBag.Products).Count > 0)
+        {
+            foreach (var product in ViewBag.Products as List<vProduct>)
+            {
+                <div><a href="/Product/Show/@product.ID">@product.Title</a> <span>@product.Status</span>@@<a href="/User/@product.UserID">@product.User.Username</a>  @product.Time</div>
+            }
+        }
+        else
+        {
+            <span>暂无最新优惠产品</span>
+        }
+
+    </div>*@
+</div>

@@ -1,0 +1,115 @@
+﻿@model VocalConcert.Web.Models.ViewModel.vAction
+
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>@Html.DisplayFor(model => model.Title)</h2>
+
+<div class="main-box">
+  
+        <h3>
+            @Html.DisplayNameFor(model => model.Title)
+        </h3>
+        <p>
+            @Html.DisplayFor(model => model.Title)
+        </p>
+
+        <h3>
+            @Html.DisplayNameFor(model => model.Description)
+        </h3>
+
+        <p>
+            @MvcHtmlString.Create(Model.Description)
+        </p>
+
+        <h3>
+            发起人
+        </h3>
+
+        <p>
+            <img width="150" height="150" style="border-radius:50%;" src="/Common/ShowUserIcon/@Model.UserID" alt="图像" /> <br />
+            <div style="width:150px;text-align:center;"> <a href="/User/@Model.UserID">@Html.DisplayFor(model => model.User.Username)</a> </div>  
+        </p>
+
+        <h3>
+            所属歌友会
+        </h3>
+
+        <p>
+            @Html.DisplayFor(model => model.Group.Title)
+        </p>
+
+
+        <h3>
+            @Html.DisplayNameFor(model => model.Begin)
+        </h3>
+
+        <p>
+            @Html.DisplayFor(model => model.Begin)
+        </p>
+
+        <h3>
+            @Html.DisplayNameFor(model => model.End)
+        </h3>
+
+        <p>
+            @Html.DisplayFor(model => model.End)
+        </p>
+
+        <h3>
+            @Html.DisplayNameFor(model => model.Time)
+        </h3>
+
+        <p>
+            @Html.DisplayFor(model => model.Time)
+        </p>
+
+        <h3>
+            @Html.DisplayNameFor(model => model.Address)
+        </h3>
+
+        <p>
+            @Html.DisplayFor(model => model.Address)
+        </p>
+
+        <h3>
+            @Html.DisplayNameFor(model => model.Hint)
+        </h3>
+
+        <p>
+            @Html.DisplayFor(model => model.Hint)
+        </p>
+
+    <p>
+        参与人员:
+        @foreach (var user in Model.Users)
+        {
+            <div style="float:left;margin-right:20px; line-height:32px;font-size:20px"> <img src="/Common/ShowUserIcon/@user.ID" alt="用户图像"  width="32" height="32" style="border-radius:50%;"/>&nbsp;&nbsp;<a href="/User/@user.ID">@user.Username</a> </div>
+        }
+    </p>
+    <div class="clr"></div>
+    <p>
+        @if (ViewBag.CurrentUser != null)
+        {
+            if (ViewBag.CurrentUser.ID == Model.UserID)
+            {
+                <span>@Html.ActionLink("修改", "Edit", new { id = Model.ID })</span>
+                <span>@Html.ActionLink("删除", "Delete", new { id = Model.ID })</span>
+            }
+        }
+
+        @if (@Model.CurrentIsExist == true)
+        {
+            <a href="/Action/Quit?aid=@Model.ID&uid=@ViewBag.CurrentUser.ID">退出该活动</a>
+        }
+        else
+        {
+            <a href="/Action/Attend/@Model.ID">参与</a>
+        }
+
+
+    </p>
+</div>
+
+

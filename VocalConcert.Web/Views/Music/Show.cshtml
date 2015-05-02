@@ -1,0 +1,141 @@
+﻿@model VocalConcert.Web.Models.ViewModel.vMusic
+
+@{
+    ViewBag.Title = "Show Music";
+}
+<script src="~/Scripts/ckeditor/ckeditor.js"></script>
+
+<style>
+    h3 {
+        font-weight: bold;
+    }
+
+    td {
+     padding:10px !important;
+    }
+</style>
+<h2>展示音乐</h2>
+
+<div class="main-box">
+    <input type="hidden" name="name" id="mid" value="@Model.ID" />
+    <h3>
+        @Html.DisplayNameFor(model => model.Title)
+    </h3>
+
+    <p>
+        @Html.DisplayFor(model => model.Title)
+    </p>
+
+    <h3>
+        @Html.DisplayNameFor(model => model.Description)
+    </h3>
+
+    <p>
+        @MvcHtmlString.Create(Model.Description)
+    </p>
+
+    <h3>
+        @Html.DisplayNameFor(model => model.Lyric)
+    </h3>
+
+    <p>
+        @MvcHtmlString.Create(Model.Lyric);
+    </p>
+
+
+    <h3>
+        上传者：
+    </h3>
+
+    <p>
+        @Html.DisplayFor(model => model.User.Username)
+    </p>
+
+
+    <h3>
+        @Html.DisplayNameFor(model => model.Time)
+    </h3>
+
+    <p>
+        @Html.DisplayFor(model => model.Time)
+    </p>
+
+    <h3>
+        @Html.DisplayNameFor(model => model.Type)
+    </h3>
+
+    <p>
+        @Html.DisplayFor(model => model.Type)
+    </p>
+
+
+    <h3>
+        人气
+    </h3>
+
+    <p>
+        @Html.DisplayFor(model => model.Score)
+    </p>
+
+    <p>
+        <audio controls="controls">
+            <source src="/Music/Download/@Model.ID" type="audio/mp3" />
+        </audio>
+    </p>
+
+    <p>
+        @if (ViewBag.CurrentUser != null)
+        {
+            if (ViewBag.CurrentUser.ID == Model.UserID)
+            {
+                <span>@Html.ActionLink("修改", "Edit", new { id = Model.ID })</span>
+            }
+        }
+
+        <a href="/Music/Download/@Model.ID">下载</a>
+    </p>
+</div>
+
+
+<div>
+    <div>
+        <table border="1" style="width:583px;">
+            @foreach (var comment in Model.Commments)
+            {
+                <tr>
+                    <td style="width:80px;">
+                        <div class="reply-userphoto">
+                            @if (comment.User.Avatar == null)
+                            {
+                                <img src="/Content/Images/userphoto.png" wih3h="64" height="64" />
+                            }
+                            else
+                            {
+                                <img src="/Common/ShowUserIcon/@comment.UserID" width="64" height="64" style="border-radius:50%;" />
+                            }
+
+                        </div>
+                    </td>
+                    <td>
+                        <a href="/User/Show/@comment.UserID">@comment.User.Username</a>@@@comment.Time<br />
+                        @comment.Content
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div style="margin-top:30px;">
+        <h3>发表评论</h3>
+        <p><textarea cols="80" rows="5" id="comment_content" class="ckeditor"></textarea></p>
+        <p>
+            评价
+            <select id="score">
+                <option value="5">非常好</option>
+                <option value="4">较好</option>
+                <option value="3">一般</option>
+                <option value="2">较差</option>
+                <option value="1">非常差</option>
+            </select>
+        <p><input type="button" id="btnSubReplyMusic" class="btn btn-default" value="提交评论" /></p>
+    </div>
+</div>
